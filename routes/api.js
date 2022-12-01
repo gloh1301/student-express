@@ -5,7 +5,8 @@ let Student = db.Student
 let router = express.Router()
 
 router.get('/students', function(req, res, next){
-    Student.findAll( {order: ['present', 'name']} ).then( students => {
+    // order to sort
+    Student.findAll( {order: ['present', 'starID']} ).then( students => {
         return res.json(students)
     }).catch( err => next(err) )
 })
@@ -23,6 +24,7 @@ router.post('/students', function(req, res, next){
     })
 })
 
+// updates pre-existing data
 router.patch('/students/:id', function(req, res, next){
     let studentID = req.params.id
     let updatedStudent = req.body
